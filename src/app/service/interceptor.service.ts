@@ -51,9 +51,7 @@ export class InterceptorService implements HttpInterceptor {
   console.log('handled error ' + err.message);
    //handle your auth error or rethrow
    this.alert.showError(err.message)
-   if(err.status===500){
-    
-   }else{
+   if(err.status==0){
     this.router.navigate([`/login`]);
    }
    

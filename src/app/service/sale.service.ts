@@ -10,10 +10,16 @@ export class SaleService extends AuthService{
   getDropdownData(type:string){
     return this.get(type+"/distinct");
   }
-  getData(type){
+  getData(type,filterOptions?){
+if(filterOptions){
+return  this.post("thistimelastyear/calculate",{"calculationType": type,"salesFilter":filterOptions})
 
-     return this.post("thistimelastyear/calculate",{"calculationType": type})
-  }
+}else{
+  return this.post("thistimelastyear/calculate",{"calculationType": type})
+}
+    
+  
+}
 
   addUser(userData){
     return this.post("user",userData)
