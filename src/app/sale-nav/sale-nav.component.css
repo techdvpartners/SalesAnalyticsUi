@@ -13,3 +13,20 @@
 .example-spacer {
   flex: 1 1 auto;
 }
+
+.sidenav-right {
+  width: 300px;
+}
+::ng-deep.sidenav-right .mat-expansion-panel-body {
+  padding: 0px 10px 10px !important;
+}
+::ng-deep .sidenav-right .mat-selection-list .mat-list-option{
+height: 35px !important;
+}
+::ng-deep .sidenav-right  .mat-list-text{
+  font-size: 14px;
+}
+.list-container{
+  max-height: 200px;
+  overflow-y: scroll;
+}

@@ -19,7 +19,7 @@
   
   <mat-sidenav
     #drawerEnd
-    class="sidenav"
+    class="sidenav sidenav-right"
     fixedInViewport="true"
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
      [mode]="'over'"
@@ -27,7 +27,7 @@
     [opened]="false"> 
     <mat-toolbar color="primary">Menu</mat-toolbar>
     
-        <mat-form-field style="padding-left: 10px">
+        <!-- <mat-form-field style="padding-left: 10px">
             <mat-select placeholder="Category"  multiple>
               <mat-option *ngFor="let cat of categories" [value]="cat">{{cat}}</mat-option>
             </mat-select>
@@ -47,7 +47,61 @@
           
         <div class="button-row" align="center">
           <button color="primary" mat-raised-button class = "mat-raised-button mat-primary">Apply Filters</button>
-        </div>
+        </div> -->
+        <mat-accordion>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Category
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="list-container">
+            <mat-selection-list  #catgory  [(ngModel)]="catSelectedOptions" (ngModelChange)="onChangeCat($event)">
+              <mat-list-option [checkboxPosition]="'before'" *ngFor="let cat of categories" [value]="cat">
+                {{cat}}
+              </mat-list-option>
+            </mat-selection-list>
+            </div>
+          </mat-expansion-panel>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Group
+              </mat-panel-title>
+              
+             
+            </mat-expansion-panel-header>
+            <div class="list-container">
+            <mat-selection-list  #vgroup [(ngModel)]="groupSelectedOptions" >
+              <mat-list-option [checkboxPosition]="'before'" *ngFor="let group of groups" [value]="group">
+                {{group}}
+              </mat-list-option>
+            </mat-selection-list>
+            </div>
+          
+          </mat-expansion-panel>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Sub Group
+              </mat-panel-title>
+             
+             
+            </mat-expansion-panel-header>
+            <div class="list-container">
+            <mat-selection-list  #vsubGroup [(ngModel)]="subSelectedOptions" >
+              <mat-list-option [checkboxPosition]="'before'" *ngFor="let sub of subGroups" [value]="sub">
+                {{sub}}
+              </mat-list-option>
+            </mat-selection-list>
+            </div>
+          
+          </mat-expansion-panel>
+        </mat-accordion>
+        <div class="button-row" align="center">
+          <button color="primary" mat-raised-button class = "mat-raised-button mat-primary" (click)="onFilter()" style="margin-top: 20px">Apply Filters</button>
+        </div> 
   </mat-sidenav>
 
   <mat-sidenav-content>

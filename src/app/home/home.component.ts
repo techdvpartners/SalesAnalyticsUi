@@ -18,8 +18,15 @@ export interface PeriodicElement {
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
-  providers:[SaleService]
+  //styleUrls: ['./home.component.css'],
+  providers:[SaleService],
+  styles: [`
+    kendo-pdf-document  {
+        
+         color:red
+    }
+
+  `]
 
 })
 
@@ -30,6 +37,13 @@ export class HomeComponent implements OnInit {
   quantity:any;
   flat_avg:any;
   weight_avg:any;
+  tableStyle={
+    'font-size':'14px'
+  }
+  tableStyleHeader={
+    'font-size':'16px'
+  }
+  
   
   @ViewChild("pdf")
   pdf;
@@ -55,6 +69,10 @@ export class HomeComponent implements OnInit {
       }
       
     });
+
+    this.menuService.getFilterData().subscribe(filterOptions=>{
+console.log(filterOptions);
+    })
 
     let promises=[];
     let revenuePromise=this.saleService.getData("Revenue");

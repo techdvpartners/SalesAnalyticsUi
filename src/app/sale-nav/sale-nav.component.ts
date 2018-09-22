@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSelectionListChange, MatListOption} from '@angular/material';
 import { AddUserComponent } from '../dailogs/add-user/add-user.component';
 import { NavMenuService } from '../service/nav-menu.service';
 import { SaleService } from '../service/sale.service';
@@ -21,6 +21,9 @@ export class SaleNavComponent {
   categories=[];
   subGroups=[];
   groups=[];
+  catSelectedOptions: string[]=[]
+  groupSelectedOptions: string[]=[]
+  subSelectedOptions: string[]=[]
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches)
@@ -45,7 +48,9 @@ export class SaleNavComponent {
 
   });
   this.saleService.getDropdownData("subgroup").subscribe(res=>{
+    
     this.subGroups=res;
+   
 
   })
 }
@@ -83,6 +88,23 @@ export class SaleNavComponent {
   logout(){
     localStorage.removeItem("auth");
     this.router.navigateByUrl("/login");
+  }
+  onChangeCat(eve){
+    console.log("eve",eve)
+  }
+  onFilter(){
+    let filterOptions={
+      "categories":this.catSelectedOptions,
+      "groups":this.groupSelectedOptions,
+      "subGroups":this.subSelectedOptions
+    };
+    // this.saleService.getFilterData(filterOptions).subscribe(res=>{
+    //   console.log("filter data",res);
+    // })
+    this.navService.setFilterData(filterOptions);
+
+    
+   // console.log("data",filterOptions)
   }
   
   }

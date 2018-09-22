@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import {
   MatSelectModule, MatButtonModule, MatCardModule, MatDialogModule, MatInputModule, MatTableModule,
-  MatToolbarModule, MatMenuModule,MatIconModule, MatProgressSpinnerModule, MatSidenavModule, MatListModule, MatGridListModule, MatSnackBarModule
+  MatToolbarModule, MatMenuModule,MatIconModule, MatProgressSpinnerModule, MatSidenavModule, MatListModule, MatGridListModule, MatSnackBarModule, MatExpansionModule
 } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -29,6 +29,8 @@ import { PDFExportModule } from '@progress/kendo-angular-pdf-export';
 import { GridModule } from '@progress/kendo-angular-grid';
 import { ExcelExportModule } from '@progress/kendo-angular-excel-export';
 import { ReportIssueComponent } from './dailogs/report-issue/report-issue.component';
+import {ToastaModule} from 'ngx-toasta';
+import { AlertService } from './service/alert/alert.service';
 
 
 
@@ -70,6 +72,7 @@ import { ReportIssueComponent } from './dailogs/report-issue/report-issue.compon
     MatGridListModule,
     MatSelectModule,
     MatSnackBarModule,
+    MatExpansionModule,
     NgProgressModule.forRoot({
       spinnerPosition: 'right',
       color: '#f71cff',
@@ -78,7 +81,8 @@ import { ReportIssueComponent } from './dailogs/report-issue/report-issue.compon
     NgProgressHttpModule.forRoot(),
     PDFExportModule,
     GridModule,
-    ExcelExportModule
+    ExcelExportModule,
+    ToastaModule.forRoot()
   ],
   providers: [
    
@@ -88,11 +92,12 @@ import { ReportIssueComponent } from './dailogs/report-issue/report-issue.compon
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,
       multi: true,
-    }
+    },AlertService
    
   
    
   ],
+  
   bootstrap: [AppComponent],
   entryComponents:[AddUserComponent, ReportIssueComponent]
 })

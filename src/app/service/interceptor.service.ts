@@ -9,13 +9,14 @@ import {AuthService} from '../service/auth.service';
 import {Observable, of} from 'rxjs';
 import {Router} from "@angular/router";
 import {catchError} from "rxjs/internal/operators";
+import { AlertService } from './alert/alert.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InterceptorService implements HttpInterceptor {
 
-  constructor(private router:Router) { }
+  constructor(private router:Router,private alert:AlertService) { }
 
   
  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -47,8 +48,15 @@ export class InterceptorService implements HttpInterceptor {
   */
  private handleAuthError(err: HttpErrorResponse): Observable<any> {
   console.log('handled error ' + err.status);
+  console.log('handled error ' + err.message);
    //handle your auth error or rethrow
-   this.router.navigate([`/login`]);
+   this.alert.showError(err.message)
+   if(err.status===500){
+    
+   }else{
+    this.router.navigate([`/login`]);
+   }
+   
    if (err.status === 401) {
      //navigate /delete cookies or whatever
      console.log('handled error ' + err.status);

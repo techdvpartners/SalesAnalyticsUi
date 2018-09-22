@@ -18,6 +18,10 @@ export class SaleService extends AuthService{
   addUser(userData){
     return this.post("user",userData)
   }
+  getFilterData(type,data){
+
+    return this.post("thistimelastyear/calculate",{"calculationType": type,salesFilter:data})
+ }
 
   
 }
