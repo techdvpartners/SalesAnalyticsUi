@@ -59,14 +59,21 @@ export class HomeComponent implements OnInit {
     let promises=[];
     let revenuePromise=this.saleService.getData("Revenue");
     let marginPromise=this.saleService.getData("Margin");
+    let marginPerPromise=this.saleService.getData("Margin %");
+    let quantityPromise=this.saleService.getData("Quantity");
+    let avgSKUPromise=this.saleService.getData("Flat Average Price per SKU");
+    let avgPricePromise=this.saleService.getData("Weighted Average Paid Price");
+
     promises.push(revenuePromise);
     promises.push(marginPromise);
+    promises.push(marginPerPromise);
+    promises.push(quantityPromise);
+    promises.push(avgSKUPromise);
+    promises.push(avgPricePromise);
 
     forkJoin(promises).subscribe(res=>{
-
       this.data = res;
       console.log(res);
-
     });
     
 
