@@ -1,42 +1,163 @@
+
 <app-sale-nav>
-  <div
+
+    <div fxLayout="row" fxLayout.xs="column " fxFlexAlign="center center" style="height: 100;margin-top:5%">
+    <div fxFlex="50" fxFlex.xs="90" fxFlex.sm="90" style="margin: 0 auto">
+    <kendo-pdf-export #pdf paperSize="A4" margin=".5cm">
+      
+    <div class="items">
+        <kendo-grid [data]="data" scrollable="none">
+          <kendo-grid-column field="heading" title="" width="60"
+                              [headerStyle]="{'background-color': '#666','color': '#fff','line-height': '1em','font-size':'11px'}"
+                              [style]="{'font-size':'12px'}">
+          </kendo-grid-column>
+          <kendo-grid-column field="apiName" title="" width="60"
+                              [headerStyle]="{'background-color': '#666','color': '#fff','line-height': '1em','font-size':'11px'}"
+                              [style]="{'font-size':'11px'}" [footerStyle]="rightAlign">
+          </kendo-grid-column>
+          <kendo-grid-column field="tier1" title="Tier1" width="90"
+                              [headerStyle]="{'background-color': '#666','color': '#fff','line-height': '1em','font-size':'11px'}"
+                              [style]="{'font-size':'11px'}" [footerStyle]="rightAlign">
+          </kendo-grid-column>
+          <kendo-grid-column field="tier2" title="Tier2" width="90"
+                              [headerStyle]="{'background-color': '#666','color': '#fff','line-height': '1em','font-size':'11px'}"
+                              [style]="{'font-size':'11px'}" [footerStyle]="rightAlign">
+          </kendo-grid-column>
+          <kendo-grid-column field="tier3" title="Tier3" width="90"
+                              [headerStyle]="{'background-color': '#666','color': '#fff','line-height': '1em','font-size':'11px'}"
+                              [style]="{'font-size':'11px'}" [footerStyle]="rightAlign">
+          </kendo-grid-column>
+          <kendo-grid-column field="tier4" title="Tier4" width="90"
+                              [headerStyle]="{'background-color': '#666','color': '#fff','line-height': '1em','font-size':'11px'}"
+                              [style]="{'font-size':'11px'}" [footerStyle]="rightAlign">
+          </kendo-grid-column>
+          <kendo-grid-column field="total" title="Total" width="90"
+                              [headerStyle]="{'background-color': '#666','color': '#fff','line-height': '1em','font-size':'11px'}"
+                              [style]="{'font-size':'11px'}" [footerStyle]="rightAlign">
+          </kendo-grid-column>
+         
+        </kendo-grid>
+
+      </div>
+
+      </kendo-pdf-export>
+    </div>
+    </div>
+
+        <kendo-excelexport [data]="data" [group]="group" fileName="sales-analytics.xlsx" #excelexport>
+            <kendo-excelexport-column field="Heading" [locked]="true" title=" ">
+            </kendo-excelexport-column>
+            <kendo-excelexport-column field="apiName" title=" ">
+            </kendo-excelexport-column>
+            <kendo-excelexport-column field="tier1" title="Tier1">
+            </kendo-excelexport-column>
+            <kendo-excelexport-column field="tier2" title="Tier2">
+            </kendo-excelexport-column>
+            <kendo-excelexport-column field="tier3" title="Tier3">
+            </kendo-excelexport-column>
+            <kendo-excelexport-column field="tier4" title="Tier4">
+            </kendo-excelexport-column>
+            <kendo-excelexport-column field="total" title="Total">
+            </kendo-excelexport-column>
+      </kendo-excelexport>
+
+  <!-- <div
   fxLayout="row" 
   fxLayout.xs="column "
-   fxFlexFill
-  >
-  <div fxFlex>
-    <table mat-table [dataSource]="dataSource" class="mat-table">
+   
+   fxFlexAlign="center center"
 
-        <!--- Note that these columns can be defined in any order.
-              The actual rendered columns are set as a property on the row definition" -->
+  >
+  <div fxFlex="50" style="margin: 0 auto">
+    <table  class="table table-striped">
+      <thead>
+        <tr class="success">
+          <th></th>
+          <th></th>
+          <th>Tier 1</th>
+          <th>Tier 2</th>
+          <th>Teir 3</th>
+          <th>Tier 4</th>
+          <th>Total</th>
+
+        </tr>
+        
+      </thead>
+      <tbody>
+          <tr>
+              <td>This time last year</td>
+              <td colspan="6"></td>
+
+          </tr>
+          <tr>
+              <td></td>
+              <td>{{revenue?.calculationType}}</td>
+              <td>{{revenue?.tier1}}</td>
+              <td>{{revenue?.tier2}}</td>
+              <td>{{revenue?.tier3}}</td>
+              <td>{{revenue?.tier4}}</td>
+              <td>{{revenue?.total}}</td>
+    
+            </tr>
+
+           <tr>
+              <td></td>
+              <td>{{margin?.calculationType}}</td>
+              <td>{{margin?.tier1}}</td>
+              <td>{{margin?.tier2}}</td>
+              <td>{{margin?.tier3}}</td>
+              <td>{{margin?.tier4}}</td>
+              <td>{{margin?.total}}</td>
+    
+            </tr>
+
+            <tr>
+                <td></td>
+                <td>{{margin_per?.calculationType}}</td>
+                <td>{{margin_per?.tier1}}</td>
+                <td>{{margin_per?.tier2}}</td>
+                <td>{{margin_per?.tier3}}</td>
+                <td>{{margin_per?.tier4}}</td>
+                <td>{{margin_per?.total}}</td>
       
-        <!-- Position Column -->
-        <ng-container matColumnDef="position">
-          <th mat-header-cell *matHeaderCellDef> No. </th>
-          <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-        </ng-container>
-      
-        <!-- Name Column -->
-        <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef> Name </th>
-          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-        </ng-container>
-      
-        <!-- Weight Column -->
-        <ng-container matColumnDef="weight">
-          <th mat-header-cell *matHeaderCellDef> Weight </th>
-          <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
-        </ng-container>
-      
-        <!-- Symbol Column -->
-        <ng-container matColumnDef="symbol">
-          <th mat-header-cell *matHeaderCellDef> Symbol </th>
-          <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
-        </ng-container>
-      
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </tr>
+
+              <tr>
+                  <td></td>
+                  <td>{{quantity?.calculationType}}</td>
+                  <td>{{quantity?.tier1}}</td>
+                  <td>{{quantity?.tier2}}</td>
+                  <td>{{quantity?.tier3}}</td>
+                  <td>{{quantity?.tier4}}</td>
+                  <td>{{quantity?.total}}</td>
+        
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td>{{flat_avg?.calculationType}}</td>
+                    <td>{{flat_avg?.tier1}}</td>
+                    <td>{{flat_avg?.tier2}}</td>
+                    <td>{{flat_avg?.tier3}}</td>
+                    <td>{{flat_avg?.tier4}}</td>
+                    <td>{{flat_avg?.total}}</td>
+          
+                  </tr>
+
+                  <tr>
+                      <td></td>
+                      <td>{{weight_avg?.calculationType}}</td>
+                      <td>{{weight_avg?.tier1}}</td>
+                      <td>{{weight_avg?.tier2}}</td>
+                      <td>{{weight_avg?.tier3}}</td>
+                      <td>{{weight_avg?.tier4}}</td>
+                      <td>{{weight_avg?.total}}</td>
+            
+                    </tr>
+      </tbody>
+        
       </table>
       </div>
-      </div>
+      </div> -->
+
 </app-sale-nav>

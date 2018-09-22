@@ -3,14 +3,14 @@
       <mat-card-title>Add New User</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-        <form class="example-form">
+        <form [formGroup]="addUserForm" class="example-form">
           <div class="example-container" fxLayout="column">
             <mat-form-field fxFlex>
-              <input matInput placeholder="Username">
+              <input matInput placeholder="Username" formControlName="username">
             </mat-form-field>
 
             <mat-form-field fxFlex>
-              <input matInput placeholder="Password" type="password">
+              <input matInput placeholder="Password" type="password" formControlName="password">
             </mat-form-field>
 
           </div>

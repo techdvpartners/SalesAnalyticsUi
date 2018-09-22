@@ -1,0 +1,7 @@
+<div [class.overlay]="overlay" class="mouse-events-off">
+   <ng-progress (started)="onStart()" (completed)="onCompleted()"></ng-progress>
+ </div>
+
+ <!-- <div class="loading-indicator">
+    <mat-spinner *ngIf="resourcesLoaded === false"></mat-spinner>
+  </div> -->

@@ -1,5 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { NavMenuService } from '../service/nav-menu.service';
+import { SaleService } from '../service/sale.service';
+import { SalesData } from '../models/sales-data';
+import { ExcelExportComponent } from '@progress/kendo-angular-excel-export';
+import { saveAs } from '@progress/kendo-drawing/pdf';
+import { PDFExportComponent } from '@progress/kendo-angular-pdf-export';
+
 export interface PeriodicElement {
   name: string;
   position: number;
@@ -7,38 +13,80 @@ export interface PeriodicElement {
   symbol: string;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  providers:[SaleService]
 
 })
 
 export class HomeComponent implements OnInit {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
+  revenue:any;
+  margin:any;
+  margin_per:any;
+  quantity:any;
+  flat_avg:any;
+  weight_avg:any;
+  
+  @ViewChild("pdf")
+  pdf;
 
-  constructor(private menuService:NavMenuService) { 
+  @ViewChild("excelexport")
+  excelexport;
+
+  constructor(private menuService:NavMenuService,private saleService:SaleService) { 
     
   }
 
+  public data: SalesData[] = [];//[new SalesData('','Revenue',234567890.11,234567890.11,234567890.11,234567890.11,234567890.11),new SalesData('','Revenue',234567890.11,234567890.11,234567890.11,234567890.11,234567890.11)];
+
   ngOnInit() {
+    console.log("Home");
     this.menuService.getNavClickMenu().subscribe((menuItem)=>{
       console.log("Menu Item",menuItem);
-    })
+      if(menuItem === 'exportPdf'){
+        console.log("PDF work here");
+        this.pdf.saveAs('sales-analytics.pdf');
+      }else if(menuItem === 'exportExcel'){
+        this.excelexport.save();
+      }
+      
+    });
+
+    
+    this.saleService.getData("Revenue").subscribe(res=>{
+      console.log("res",res);
+      this.revenue=res;
+      this.data.push(new SalesData('',this.revenue.calculationType,this.revenue.tier1,this.revenue.tier2,this.revenue.tier3,this.revenue.tier4,this.revenue.total));
+    });
+      this.saleService.getData("Margin").subscribe(res=>{
+        console.log("res",res);
+        this.margin=res;
+        this.data.push(new SalesData('',this.margin.calculationType,this.margin.tier1,this.margin.tier2,this.margin.tier3,this.margin.tier4,this.margin.total));
+      });
+      this.saleService.getData("Margin %").subscribe(res=>{
+        console.log("res",res);
+        this.margin_per=res;
+        this.data.push(new SalesData('',this.margin_per.calculationType,this.margin_per.tier1,this.margin_per.tier2,this.margin_per.tier3,this.margin_per.tier4,this.margin_per.total));
+      });
+      this.saleService.getData("Quantity").subscribe(res=>{
+        console.log("res",res);
+        this.quantity=res;
+        this.data.push(new SalesData('',this.quantity.calculationType,this.quantity.tier1,this.quantity.tier2,this.quantity.tier3,this.quantity.tier4,this.quantity.total));
+      });
+      this.saleService.getData("Flat Average Price per SKU").subscribe(res=>{
+        console.log("res",res);
+        this.flat_avg=res;
+        this.data.push(new SalesData('',this.flat_avg.calculationType,this.flat_avg.tier1,this.flat_avg.tier2,this.flat_avg.tier3,this.flat_avg.tier4,this.flat_avg.total));
+      });
+      this.saleService.getData("Weighted Average Paid Price").subscribe(res=>{
+        console.log("res",res);
+        this.weight_avg=res;
+        this.data.push(new SalesData('',this.weight_avg.calculationType,this.weight_avg.tier1,this.weight_avg.tier2,this.weight_avg.tier3,this.weight_avg.tier4,this.weight_avg.total));
+      });
+
   }
 
 }

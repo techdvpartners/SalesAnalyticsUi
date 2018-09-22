@@ -8,14 +8,15 @@
     [opened]="false"> 
     <mat-toolbar color="primary">Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item (click)="navClick('export')">Export as pdf</a>
-      <a mat-list-item href="#">Export as excel</a>
+      <a mat-list-item (click)="navClick('exportPdf')">Export as pdf</a>
+      <a mat-list-item (click)="navClick('exportExcel')">Export as excel</a>
       
-      <a mat-list-item href="#">Report an issue</a>
-      <a mat-list-item (click)="openUserdailog()">Add new user</a>
-      <a mat-list-item href="#">Logout</a>
+      <a mat-list-item (click)="openReportIssuedailog()">Report an issue</a>
+      <a *ngIf="username == 'admin'" mat-list-item (click)="openUserdailog()">Add new user</a>
+      <a mat-list-item (click)="logout()">Logout</a>
     </mat-nav-list>
   </mat-sidenav>
+  
   <mat-sidenav
     #drawerEnd
     class="sidenav"
@@ -26,16 +27,27 @@
     [opened]="false"> 
     <mat-toolbar color="primary">Menu</mat-toolbar>
     
-        <mat-form-field>
-            <mat-select placeholder="Global"  multiple>
-              <mat-option  [value]="opt1">Option 1</mat-option>
-              <mat-option  [value]="opt1">Option 1</mat-option>
-              <mat-option  [value]="opt1">Option 1</mat-option>
+        <mat-form-field style="padding-left: 10px">
+            <mat-select placeholder="Category"  multiple>
+              <mat-option *ngFor="let cat of categories" [value]="cat">{{cat}}</mat-option>
             </mat-select>
-            
-          </mat-form-field>
+        </mat-form-field>
+         
+        <mat-form-field style="padding-left: 10px">
+          <mat-select placeholder="Group"  multiple>
+            <mat-option *ngFor="let group of groups" [value]="group">{{group}}</mat-option>
+          </mat-select>  
+        </mat-form-field>
      
-  
+        <mat-form-field style="padding-left: 10px">
+          <mat-select placeholder="SubGroup"  multiple>
+            <mat-option *ngFor="let sub of subGroups" [value]="sub">{{sub}}</mat-option>
+          </mat-select>    
+        </mat-form-field>
+          
+        <div class="button-row" align="center">
+          <button color="primary" mat-raised-button class = "mat-raised-button mat-primary">Apply Filters</button>
+        </div>
   </mat-sidenav>
 
   <mat-sidenav-content>
@@ -48,7 +60,9 @@
         >
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>Sales Analytics</span>
+      <div align="center" style="width:100%">
+        <span>Sales Analytics</span>
+      </div>
       <span class="example-spacer"></span>
       <button
       type="button"

@@ -10,22 +10,23 @@
               <mat-card-title>Login</mat-card-title>
             </mat-card-header>
             <mat-card-content>
-              <form class="example-form">
+              <form class="example-form"  [formGroup]="loginForm">
                 <div class="example-container" fxLayout="column">
                   <mat-form-field fxFlex>
-                    <input matInput placeholder="Username">
+                    <input matInput placeholder="Username" formControlName="username">
                   </mat-form-field>
 
                   <mat-form-field fxFlex>
-                    <input matInput placeholder="Password" type="password">
+                    <input matInput placeholder="Password" type="password" formControlName="password">
                   </mat-form-field>
 
                 </div>
               </form>
-              <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
+              <!-- <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner> -->
             </mat-card-content>
             <mat-card-actions>
               <button mat-raised-button (click)="login()" color="primary">Login</button>
+              <mat-error>{{error}}</mat-error>
             </mat-card-actions>
           </mat-card>
   </div>

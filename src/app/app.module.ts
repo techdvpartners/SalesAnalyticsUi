@@ -6,17 +6,31 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import {
   MatSelectModule, MatButtonModule, MatCardModule, MatDialogModule, MatInputModule, MatTableModule,
-  MatToolbarModule, MatMenuModule,MatIconModule, MatProgressSpinnerModule, MatSidenavModule, MatListModule, MatGridListModule
+  MatToolbarModule, MatMenuModule,MatIconModule, MatProgressSpinnerModule, MatSidenavModule, MatListModule, MatGridListModule, MatSnackBarModule
 } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { SaleNavComponent } from './sale-nav/sale-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 import { AddUserComponent } from './dailogs/add-user/add-user.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+//import { HTTPListener, HTTPStatus } from './service/interceptor/inerceptor.service';
+import { SaleService } from './service/sale.service';
+import { AuthService } from './service/auth.service';
+import { NgProgressModule } from '@ngx-progressbar/core';
+
+import { NgProgressHttpModule } from '@ngx-progressbar/http';
+import { LoaderComponent } from './loader/loader.component';
+import { InterceptorService } from './service/interceptor.service';
+import { PDFExportModule } from '@progress/kendo-angular-pdf-export';
+import { GridModule } from '@progress/kendo-angular-grid';
+import { ExcelExportModule } from '@progress/kendo-angular-excel-export';
+import { ReportIssueComponent } from './dailogs/report-issue/report-issue.component';
+
+
 
 @NgModule({
   declarations: [
@@ -25,9 +39,16 @@ import { HttpClientModule } from '@angular/common/http';
     SaleNavComponent,
     DashboardComponent,
     HomeComponent,
-    AddUserComponent
+    AddUserComponent,
+    LoaderComponent,
+    ReportIssueComponent,
+   
   ],
   imports: [
+    
+    
+    ReactiveFormsModule ,
+    FormsModule ,  
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
@@ -47,10 +68,32 @@ import { HttpClientModule } from '@angular/common/http';
     MatSidenavModule, 
     MatListModule,
     MatGridListModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSnackBarModule,
+    NgProgressModule.forRoot({
+      spinnerPosition: 'right',
+      color: '#f71cff',
+      thick: true
+    }),
+    NgProgressHttpModule.forRoot(),
+    PDFExportModule,
+    GridModule,
+    ExcelExportModule
   ],
-  providers: [],
+  providers: [
+   
+    SaleService,
+    AuthService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
+      multi: true,
+    }
+   
+  
+   
+  ],
   bootstrap: [AppComponent],
-  entryComponents:[AddUserComponent]
+  entryComponents:[AddUserComponent, ReportIssueComponent]
 })
 export class AppModule { }
