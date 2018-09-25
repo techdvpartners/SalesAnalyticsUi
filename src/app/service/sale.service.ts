@@ -12,7 +12,7 @@ export class SaleService extends AuthService{
   }
   getData(type,filterOptions?){
 if(filterOptions){
-return  this.post("thistimelastyear/calculate",{"calculationType": type,"salesFilter":filterOptions})
+return  this.post("thistimelastyear/salesFilter",{"calculationType": type,"salesFilter":filterOptions})
 
 }else{
   return this.post("thistimelastyear/calculate",{"calculationType": type})
@@ -20,6 +20,17 @@ return  this.post("thistimelastyear/calculate",{"calculationType": type,"salesFi
     
   
 }
+
+getSKUData(type,filterOptions?){
+  if(filterOptions){
+  return  this.post("sku/salesFilter",{"calculationType": type,"salesFilter":filterOptions})
+  
+  }else{
+    return this.post("sku/calculate",{"calculationType": type})
+  }
+      
+    
+  }
 
   addUser(userData){
     return this.post("user",userData)

@@ -5,7 +5,7 @@ import { SalesData } from '../models/sales-data';
 import { ExcelExportComponent } from '@progress/kendo-angular-excel-export';
 import { saveAs } from '@progress/kendo-drawing/pdf';
 import { PDFExportComponent } from '@progress/kendo-angular-pdf-export';
-import { Observable, forkJoin } from 'rxjs';
+import { Observable, forkJoin, empty } from 'rxjs';
 
 export interface PeriodicElement {
   name: string;
@@ -56,7 +56,7 @@ export class HomeComponent implements OnInit {
     
   }
 
-  public data: SalesData[] = [];//[new SalesData('','Revenue',234567890.11,234567890.11,234567890.11,234567890.11,234567890.11),new SalesData('','Revenue',234567890.11,234567890.11,234567890.11,234567890.11,234567890.11)];
+  public data: any = [];//[new SalesData('','Revenue',234567890.11,234567890.11,234567890.11,234567890.11,234567890.11),new SalesData('','Revenue',234567890.11,234567890.11,234567890.11,234567890.11,234567890.11)];
 
   ngOnInit() {
     console.log("Home");
@@ -81,13 +81,15 @@ export class HomeComponent implements OnInit {
   }
   getData(filterOtions?){
     let promises=[];
-    let revenuePromise=this.saleService.getData("Revenue",filterOtions);
+    let skuPromise = this.saleService.getSKUData("SKUs",filterOtions);
+    let revenuePromise=this.saleService.getData("Revenue",filterOtions);  
     let marginPromise=this.saleService.getData("Margin",filterOtions);
     let marginPerPromise=this.saleService.getData("Margin %",filterOtions);
     let quantityPromise=this.saleService.getData("Quantity",filterOtions);
     let avgSKUPromise=this.saleService.getData("Flat Average Price per SKU",filterOtions);
     let avgPricePromise=this.saleService.getData("Weighted Average Paid Price",filterOtions);
 
+    promises.push(skuPromise);
     promises.push(revenuePromise);
     promises.push(marginPromise);
     promises.push(marginPerPromise);
@@ -96,8 +98,12 @@ export class HomeComponent implements OnInit {
     promises.push(avgPricePromise);
 
     forkJoin(promises).subscribe(res=>{
-      this.data = res;
-      console.log(res);
+     this.data = res;
+     let header={"heading":"This Time Last Year"};
+     if(this.data){
+      this.data.splice(0,0,header);
+     }
+      console.log(this.data);
     });
     
   }

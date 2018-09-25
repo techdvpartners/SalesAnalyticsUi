@@ -7,7 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class AuthService {
  
-  apiUrl="http://54.86.137.224:8001/"
+  apiUrl="http://54.86.137.224:8001/";
+  //apiUrl="http://localhost:8001/"
   constructor(protected http:HttpClient) { 
 
     
@@ -59,7 +60,7 @@ export class AuthService {
 
     login(username,password){
       let headerOptions=this.loginHeaderOptions(username,password);
-      console.log("header options",headerOptions)
+      //console.log("header options",headerOptions)
       return this.get("user/login",headerOptions)
     }
     

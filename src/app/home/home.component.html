@@ -3,36 +3,36 @@
 
     <div fxLayout="row" fxLayout.xs="column " fxFlexAlign="center center" style="height: 100;margin-top:5%">
     <div fxFlex="50" fxFlex.xs="90" fxFlex.sm="90" style="margin: 0 auto">
-    <kendo-pdf-export #pdf paperSize="A4" margin=".5cm" [scale]="0.5">
+    <kendo-pdf-export #pdf paperSize="A4" margin="1cm" [scale]="0.7">
       
     <div class="items">
         <kendo-grid [data]="data" scrollable="none">
-          <kendo-grid-column field="heading" title="" width="60"
-                              [headerStyle]="{'background-color': '#666','color': '#fff','line-height': '1em','font-size':'11px'}"
+          <kendo-grid-column field="heading" title="" 
+                              [headerStyle]="{'background-color': '#666','color': '#fff','line-height': '1em','font-size':'14px'}"
                               [style]="tableStyleHeader" >
           </kendo-grid-column>
-          <kendo-grid-column field="calculationType" title="" width="60"
-                              [headerStyle]="{'background-color': '#666','color': '#fff','line-height': '1em','font-size':'11px'}"
+          <kendo-grid-column field="calculationType" title=""
+                              [headerStyle]="{'background-color': '#666','color': '#fff','line-height': '1em','font-size':'14px'}"
                               [style]="tableStyle" [footerStyle]="rightAlign">
           </kendo-grid-column>
-          <kendo-grid-column field="tier1" title="Tier1" width="90"
-                              [headerStyle]="{'background-color': '#666','color': '#fff','line-height': '1em','font-size':'11px'}"
+          <kendo-grid-column field="tier1" title="Tier1"
+                              [headerStyle]="{'background-color': '#666','color': '#fff','line-height': '1em','font-size':'14px'}"
                               [style]="tableStyle" [footerStyle]="rightAlign">
           </kendo-grid-column>
-          <kendo-grid-column field="tier2" title="Tier2" width="90"
-                              [headerStyle]="{'background-color': '#666','color': '#fff','line-height': '1em','font-size':'11px'}"
+          <kendo-grid-column field="tier2" title="Tier2"
+                              [headerStyle]="{'background-color': '#666','color': '#fff','line-height': '1em','font-size':'14px'}"
                               [style]="tableStyle" [footerStyle]="rightAlign">
           </kendo-grid-column>
-          <kendo-grid-column field="tier3" title="Tier3" width="90"
-                              [headerStyle]="{'background-color': '#666','color': '#fff','line-height': '1em','font-size':'11px'}"
+          <kendo-grid-column field="tier3" title="Tier3"
+                              [headerStyle]="{'background-color': '#666','color': '#fff','line-height': '1em','font-size':'14px'}"
                               [style]="tableStyle" [footerStyle]="rightAlign">
           </kendo-grid-column>
-          <kendo-grid-column field="tier4" title="Tier4" width="90"
-                              [headerStyle]="{'background-color': '#666','color': '#fff','line-height': '1em','font-size':'11px'}"
+          <kendo-grid-column field="tier4" title="Tier4"
+                              [headerStyle]="{'background-color': '#666','color': '#fff','line-height': '1em','font-size':'14px'}"
                               [style]="tableStyle" [footerStyle]="rightAlign">
           </kendo-grid-column>
-          <kendo-grid-column field="total" title="Total" width="90"
-                              [headerStyle]="{'background-color': '#666','color': '#fff','line-height': '1em','font-size':'11px'}"
+          <kendo-grid-column field="total" title="Total"  
+                              [headerStyle]="{'background-color': '#666','color': '#fff','line-height': '1em','font-size':'14px'}"
                               [style]="tableStyle" [footerStyle]="rightAlign">
           </kendo-grid-column>
          
@@ -45,9 +45,9 @@
     </div>
 
         <kendo-excelexport [data]="data" [group]="group" fileName="sales-analytics.xlsx" #excelexport>
-            <kendo-excelexport-column field="Heading" [locked]="true" title=" ">
+            <kendo-excelexport-column field="heading" [locked]="true" title=" ">
             </kendo-excelexport-column>
-            <kendo-excelexport-column field="apiName" title=" ">
+            <kendo-excelexport-column field="calculationType" title=" ">
             </kendo-excelexport-column>
             <kendo-excelexport-column field="tier1" title="Tier1">
             </kendo-excelexport-column>
@@ -60,104 +60,5 @@
             <kendo-excelexport-column field="total" title="Total">
             </kendo-excelexport-column>
       </kendo-excelexport>
-
-  <!-- <div
-  fxLayout="row" 
-  fxLayout.xs="column "
-   
-   fxFlexAlign="center center"
-
-  >
-  <div fxFlex="50" style="margin: 0 auto">
-    <table  class="table table-striped">
-      <thead>
-        <tr class="success">
-          <th></th>
-          <th></th>
-          <th>Tier 1</th>
-          <th>Tier 2</th>
-          <th>Teir 3</th>
-          <th>Tier 4</th>
-          <th>Total</th>
-
-        </tr>
-        
-      </thead>
-      <tbody>
-          <tr>
-              <td>This time last year</td>
-              <td colspan="6"></td>
-
-          </tr>
-          <tr>
-              <td></td>
-              <td>{{revenue?.calculationType}}</td>
-              <td>{{revenue?.tier1}}</td>
-              <td>{{revenue?.tier2}}</td>
-              <td>{{revenue?.tier3}}</td>
-              <td>{{revenue?.tier4}}</td>
-              <td>{{revenue?.total}}</td>
-    
-            </tr>
-
-           <tr>
-              <td></td>
-              <td>{{margin?.calculationType}}</td>
-              <td>{{margin?.tier1}}</td>
-              <td>{{margin?.tier2}}</td>
-              <td>{{margin?.tier3}}</td>
-              <td>{{margin?.tier4}}</td>
-              <td>{{margin?.total}}</td>
-    
-            </tr>
-
-            <tr>
-                <td></td>
-                <td>{{margin_per?.calculationType}}</td>
-                <td>{{margin_per?.tier1}}</td>
-                <td>{{margin_per?.tier2}}</td>
-                <td>{{margin_per?.tier3}}</td>
-                <td>{{margin_per?.tier4}}</td>
-                <td>{{margin_per?.total}}</td>
-      
-              </tr>
-
-              <tr>
-                  <td></td>
-                  <td>{{quantity?.calculationType}}</td>
-                  <td>{{quantity?.tier1}}</td>
-                  <td>{{quantity?.tier2}}</td>
-                  <td>{{quantity?.tier3}}</td>
-                  <td>{{quantity?.tier4}}</td>
-                  <td>{{quantity?.total}}</td>
-        
-                </tr>
-
-                <tr>
-                    <td></td>
-                    <td>{{flat_avg?.calculationType}}</td>
-                    <td>{{flat_avg?.tier1}}</td>
-                    <td>{{flat_avg?.tier2}}</td>
-                    <td>{{flat_avg?.tier3}}</td>
-                    <td>{{flat_avg?.tier4}}</td>
-                    <td>{{flat_avg?.total}}</td>
-          
-                  </tr>
-
-                  <tr>
-                      <td></td>
-                      <td>{{weight_avg?.calculationType}}</td>
-                      <td>{{weight_avg?.tier1}}</td>
-                      <td>{{weight_avg?.tier2}}</td>
-                      <td>{{weight_avg?.tier3}}</td>
-                      <td>{{weight_avg?.tier4}}</td>
-                      <td>{{weight_avg?.total}}</td>
-            
-                    </tr>
-      </tbody>
-        
-      </table>
-      </div>
-      </div> -->
 
 </app-sale-nav>
