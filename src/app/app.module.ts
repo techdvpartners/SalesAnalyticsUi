@@ -31,6 +31,7 @@ import { ExcelExportModule } from '@progress/kendo-angular-excel-export';
 import { ReportIssueComponent } from './dailogs/report-issue/report-issue.component';
 import {ToastaModule} from 'ngx-toasta';
 import { AlertService } from './service/alert/alert.service';
+import { ShowSkuComponent } from './dailogs/show-sku/show-sku.component';
 
 
 
@@ -44,6 +45,7 @@ import { AlertService } from './service/alert/alert.service';
     AddUserComponent,
     LoaderComponent,
     ReportIssueComponent,
+    ShowSkuComponent,
    
   ],
   imports: [
@@ -99,6 +101,6 @@ import { AlertService } from './service/alert/alert.service';
   ],
   
   bootstrap: [AppComponent],
-  entryComponents:[AddUserComponent, ReportIssueComponent]
+  entryComponents:[AddUserComponent, ReportIssueComponent,ShowSkuComponent]
 })
 export class AppModule { }

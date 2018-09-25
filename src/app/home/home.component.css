@@ -12,5 +12,11 @@ kendo-pdf-document td {
     color: red !important;
 
 }
+.sku-class{
+    color: blue
+}
+.no-sku-class{
+    color: red
+}
 
 

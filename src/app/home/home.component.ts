@@ -6,6 +6,8 @@ import { ExcelExportComponent } from '@progress/kendo-angular-excel-export';
 import { saveAs } from '@progress/kendo-drawing/pdf';
 import { PDFExportComponent } from '@progress/kendo-angular-pdf-export';
 import { Observable, forkJoin, empty } from 'rxjs';
+import { MatDialog } from '@angular/material';
+import { ShowSkuComponent } from '../dailogs/show-sku/show-sku.component';
 
 export interface PeriodicElement {
   name: string;
@@ -20,15 +22,6 @@ export interface PeriodicElement {
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
   providers:[SaleService],
-  
-  styles: [`
-    kendo-pdf-document  {
-         font-size: 10px;
-         color:red !important
-    }
-
-   
-  `]
   })
 
 export class HomeComponent implements OnInit {
@@ -52,7 +45,7 @@ export class HomeComponent implements OnInit {
   @ViewChild("excelexport")
   excelexport;
 
-  constructor(private menuService:NavMenuService,private saleService:SaleService) { 
+  constructor(private menuService:NavMenuService,private saleService:SaleService,private dialog:MatDialog) { 
     
   }
 
@@ -107,5 +100,20 @@ export class HomeComponent implements OnInit {
     });
     
   }
+  onSkuClick(item){
+    console.log("item",item)
+  // uncomment this
+   // if(item && item.length>0){
+      const dialogRef = this.dialog.open(ShowSkuComponent, {
+        width: '40%',
+        data: item
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        
+      });
+      
+  //  }
 
+  }
 }
