@@ -75,26 +75,30 @@ export class HomeComponent implements OnInit {
   getData(filterOtions?){
     let promises=[];
     let skuPromise = this.saleService.getSKUData("SKUs",filterOtions);
-    let revenuePromise=this.saleService.getData("Revenue",filterOtions);  
-    let marginPromise=this.saleService.getData("Margin",filterOtions);
-    let marginPerPromise=this.saleService.getData("Margin %",filterOtions);
-    let quantityPromise=this.saleService.getData("Quantity",filterOtions);
-    let avgSKUPromise=this.saleService.getData("Flat Average Price per SKU",filterOtions);
-    let avgPricePromise=this.saleService.getData("Weighted Average Paid Price",filterOtions);
+    let kpiPromise=this.saleService.getData("kpi",filterOtions);  
+    //let revenuePromise=this.saleService.getData("Revenue",filterOtions);  
+    //let marginPromise=this.saleService.getData("Margin",filterOtions);
+    //let marginPerPromise=this.saleService.getData("Margin %",filterOtions);
+    //let quantityPromise=this.saleService.getData("Quantity",filterOtions);
+    //let avgSKUPromise=this.saleService.getData("Flat Average Price per SKU",filterOtions);
+    //let avgPricePromise=this.saleService.getData("Weighted Average Paid Price",filterOtions);
 
     promises.push(skuPromise);
-    promises.push(revenuePromise);
-    promises.push(marginPromise);
-    promises.push(marginPerPromise);
-    promises.push(quantityPromise);
-    promises.push(avgSKUPromise);
-    promises.push(avgPricePromise);
+    promises.push(kpiPromise);
+    //promises.push(revenuePromise);
+    //promises.push(marginPromise);
+    //promises.push(marginPerPromise);
+    //promises.push(quantityPromise);
+    //promises.push(avgSKUPromise);
+    //promises.push(avgPricePromise);
 
     forkJoin(promises).subscribe(res=>{
-     this.data = res;
-     let header={"heading":"This Time Last Year"};
+
+    console.log("DATATATA : "+res);
+     this.data = res[1];
+    //  let header={"heading":"This Time Last Year"};
      if(this.data){
-      this.data.splice(0,0,header);
+     this.data.splice(0,0,res[0]);
      }
       console.log(this.data);
     });
@@ -102,8 +106,7 @@ export class HomeComponent implements OnInit {
   }
   onSkuClick(item){
     console.log("item",item)
-  // uncomment this
-   // if(item && item.length>0){
+    if(item && item.length>0){
       const dialogRef = this.dialog.open(ShowSkuComponent, {
         width: '40%',
         data: item
@@ -113,7 +116,7 @@ export class HomeComponent implements OnInit {
         
       });
       
-  //  }
+    }
 
   }
 }

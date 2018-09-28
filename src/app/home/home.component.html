@@ -7,10 +7,10 @@
       
     <div class="items">
         <kendo-grid [data]="data" scrollable="none">
-          <kendo-grid-column field="heading" title="" 
+          <!-- <kendo-grid-column field="heading" title="" 
                               [headerStyle]="{'background-color': '#666','color': '#fff','line-height': '1em','font-size':'14px'}"
                               [style]="tableStyleHeader" >
-          </kendo-grid-column>
+          </kendo-grid-column> -->
           <kendo-grid-column field="calculationType" title=""
                               [headerStyle]="{'background-color': '#666','color': '#fff','line-height': '1em','font-size':'14px'}"
                               [style]="tableStyle" [footerStyle]="rightAlign">
@@ -20,8 +20,7 @@
                               [style]="tableStyle" [footerStyle]="rightAlign" >
 
                             <ng-template kendoGridCellTemplate let-dataItem>
-                               <a [ngClass]="{'sku-class':dataItem.isSku,'no-sku-class':!dataItem.isSku}" (click)="onSkuClick(dataItem.sku_tier1)">{{dataItem.tier1}}</a> 
-    
+                               <a [ngClass]="{'sku-class':dataItem.isSku,'no-sku-class':!dataItem.isSku}" (click)="onSkuClick(dataItem.sku_tier1)">{{dataItem.tier1}}</a>
                             </ng-template>
              
           </kendo-grid-column>
@@ -29,29 +28,29 @@
                               [headerStyle]="{'background-color': '#666','color': '#fff','line-height': '1em','font-size':'14px'}"
                               [style]="tableStyle" [footerStyle]="rightAlign">
                               <ng-template kendoGridCellTemplate let-dataItem>
-                                <a [ngClass]="{'sku-class':dataItem.isSku,'no-sku-class':!dataItem.isSku}" (click)="onSkuClick(dataItem.sku_tier2)">{{dataItem.tier2}}</a> 
-     
+                                <a [ngClass]="{'sku-class':dataItem.isSku,'no-sku-class':!dataItem.isSku}" (click)="onSkuClick(dataItem.sku_tier2)">{{dataItem.tier2}}</a>
                              </ng-template>
           </kendo-grid-column>
           <kendo-grid-column field="tier3" title="Tier3"
                               [headerStyle]="{'background-color': '#666','color': '#fff','line-height': '1em','font-size':'14px'}"
                               [style]="tableStyle" [footerStyle]="rightAlign">
                               <ng-template kendoGridCellTemplate let-dataItem>
-                                <a [ngClass]="{'sku-class':dataItem.isSku,'no-sku-class':!dataItem.isSku}" (click)="onSkuClick(dataItem.sku_tier3)">{{dataItem.tier3}}</a> 
-     
+                                <a [ngClass]="{'sku-class':dataItem.isSku,'no-sku-class':!dataItem.isSku}" (click)="onSkuClick(dataItem.sku_tier3)">{{dataItem.tier3}}</a>
                              </ng-template>
           </kendo-grid-column>
           <kendo-grid-column field="tier4" title="Tier4"
                               [headerStyle]="{'background-color': '#666','color': '#fff','line-height': '1em','font-size':'14px'}"
                               [style]="tableStyle" [footerStyle]="rightAlign">
                               <ng-template kendoGridCellTemplate let-dataItem>
-                                <a [ngClass]="{'sku-class':dataItem.isSku,'no-sku-class':!dataItem.isSku}" (click)="onSkuClick(dataItem.sku_tier4)">{{dataItem.tier4}}</a> 
-     
+                                <a [ngClass]="{'sku-class':dataItem.isSku,'no-sku-class':!dataItem.isSku}" (click)="onSkuClick(dataItem.sku_tier4)">{{dataItem.tier4}}</a>
                              </ng-template>
           </kendo-grid-column>
           <kendo-grid-column field="total" title="Total"  
                               [headerStyle]="{'background-color': '#666','color': '#fff','line-height': '1em','font-size':'14px'}"
                               [style]="tableStyle" [footerStyle]="rightAlign">
+                              <ng-template kendoGridCellTemplate let-dataItem>
+                                <a [ngClass]="{'sku-class':dataItem.isSku,'no-sku-class':!dataItem.isSku}" (click)="onSkuClick(dataItem.sku_total)">{{dataItem.total}}</a>
+                             </ng-template>
           </kendo-grid-column>
          
         </kendo-grid>
@@ -63,8 +62,8 @@
     </div>
 
         <kendo-excelexport [data]="data" [group]="group" fileName="sales-analytics.xlsx" #excelexport>
-            <kendo-excelexport-column field="heading" [locked]="true" title=" ">
-            </kendo-excelexport-column>
+            <!-- <kendo-excelexport-column field="heading" [locked]="true" title=" ">
+            </kendo-excelexport-column> -->
             <kendo-excelexport-column field="calculationType" title=" ">
             </kendo-excelexport-column>
             <kendo-excelexport-column field="tier1" title="Tier1">
