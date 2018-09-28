@@ -38,7 +38,11 @@ export class SaleNavComponent {
   let encodedString = localStorage.getItem("auth");
   let decodedString = atob(encodedString);
   this.username = decodedString.split(":")[0];
+  this.getDropdown();
+  
+}
 
+getDropdown(){
   this.saleService.getDropdownData("category").subscribe(res=>{
     this.categories=res;
 
@@ -90,7 +94,36 @@ export class SaleNavComponent {
     this.router.navigateByUrl("/login");
   }
   onChangeCat(eve){
+    //group/filtered
     console.log("eve",eve)
+    
+    let filterOptions={
+      categories:eve
+    }
+    console.log(filterOptions);
+    this.saleService.getDropdownFilter("category",filterOptions).subscribe(res=>{
+     this.groupSelectedOptions=[];
+     this.subSelectedOptions=[];
+     this.groups= res.grps;
+     this.subGroups=res.subgroups;
+    
+    console.log("aas",res)
+    })
+
+  
+  }
+  onChangeGroup(eve){
+    console.log("on group change",eve);
+    let filterOptions={
+      groups:eve
+    }
+    this.saleService.getDropdownFilter("group",filterOptions).subscribe(res=>{
+      this.subSelectedOptions=[];
+      this.subGroups=res.subgroups;
+      console.log("aas",res)
+      //this.subGroups=res;
+
+    })
   }
   onFilter(){
     let filterOptions={
@@ -105,6 +138,13 @@ export class SaleNavComponent {
 
     
    // console.log("data",filterOptions)
+  }
+  onReset(){
+    this.groupSelectedOptions=[];
+    this.catSelectedOptions=[];
+    this.subSelectedOptions=[];
+    this.getDropdown();
+
   }
   
   }

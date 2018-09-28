@@ -32,11 +32,16 @@ export class HomeComponent implements OnInit {
   flat_avg:any;
   weight_avg:any;
   tableStyle={
-    'font-size':'14px'
+    'font-size':'14px',
+    'text-align':'center'
   }
   tableStyleHeader={
-    'font-size':'16px'
+    'font-size':'16px',
+    'text-align':'center'
   }
+  headerStyle=
+    {'background-color': '#666','color': '#fff','line-height': '1em','font-size':'14px','text-align':'center'}
+  
   
   
   @ViewChild("pdf")
@@ -99,17 +104,18 @@ export class HomeComponent implements OnInit {
     //  let header={"heading":"This Time Last Year"};
      if(this.data){
      this.data.splice(0,0,res[0]);
+     this.data.splice(5,0,{calculationType:" "});
      }
       console.log(this.data);
     });
     
   }
-  onSkuClick(item){
-    console.log("item",item)
-    if(item && item.length>0){
+  onSkuClick(items){
+    console.log("item",items)
+    if(items && items.length>0){
       const dialogRef = this.dialog.open(ShowSkuComponent, {
         width: '40%',
-        data: item
+        data: items
       });
       dialogRef.afterClosed().subscribe(result => {
         console.log('The dialog was closed');

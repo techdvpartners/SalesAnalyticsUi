@@ -72,8 +72,8 @@
              
             </mat-expansion-panel-header>
             <div class="list-container">
-            <mat-selection-list  #vgroup [(ngModel)]="groupSelectedOptions" >
-              <mat-list-option [checkboxPosition]="'before'" *ngFor="let group of groups" [value]="group">
+            <mat-selection-list  #vgroup [(ngModel)]="groupSelectedOptions" (ngModelChange)="onChangeGroup($event)">
+              <mat-list-option [checkboxPosition]="'before'" *ngFor="let group of groups" [value]="group" >
                 {{group}}
               </mat-list-option>
             </mat-selection-list>
@@ -101,21 +101,22 @@
         </mat-accordion>
         <div class="button-row" align="center">
           <button color="primary" mat-raised-button class = "mat-raised-button mat-primary" (click)="onFilter()" style="margin-top: 20px">Apply Filters</button>
+          <button color="primary" mat-raised-button class = "mat-raised-button mat-primary" (click)="onReset()" style="margin-top: 20px;margin-left: 20px">Reset</button>
         </div> 
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <mat-toolbar color="primary">
+    <mat-toolbar >
       <button
         type="button"
         aria-label="Toggle sidenav"
         mat-icon-button
         (click)="drawer.toggle()"
         >
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        <mat-icon aria-label="Side nav toggle icon" style="color: #ffffff">menu</mat-icon>
       </button>
       <div align="center" style="width:100%">
-        <span>Sales Analytics</span>
+        <span style="color: #ffffff">SF Pricing Framework</span>
       </div>
       <span class="example-spacer"></span>
       <button
@@ -124,7 +125,7 @@
       mat-icon-button
       (click)="drawerEnd.toggle()"
       >
-      <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      <mat-icon aria-label="Side nav toggle icon"  style="color: #ffffff">menu</mat-icon>
     </button>
     </mat-toolbar>
   <ng-content></ng-content>

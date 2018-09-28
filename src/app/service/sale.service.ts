@@ -40,5 +40,9 @@ getSKUData(type,filterOptions?){
     return this.post("thistimelastyear/calculate",{"calculationType": type,salesFilter:data})
  }
 
+ getDropdownFilter(type:string,filterOptions){
+  return this.post(type+"/filtered",filterOptions);
+}
+
   
 }

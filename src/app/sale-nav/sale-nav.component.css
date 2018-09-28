@@ -30,3 +30,6 @@ height: 35px !important;
   max-height: 200px;
   overflow-y: scroll;
 }
+.mat-toolbar{
+  background: #00539F !important
+}

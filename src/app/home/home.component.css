@@ -13,10 +13,13 @@ kendo-pdf-document td {
 
 }
 .sku-class{
-    color: blue
+    color: blue;
+    cursor: pointer;
+    text-decoration: underline;
+    
 }
 .no-sku-class{
-    color: red
+    color: black
 }
 
 
