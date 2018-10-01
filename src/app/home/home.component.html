@@ -7,49 +7,86 @@
       
     <div class="items">
         <kendo-grid [data]="data" scrollable="none">
-          <!-- <kendo-grid-column field="heading" title="" 
-                              [headerStyle]="{'background-color': '#666','color': '#fff','line-height': '1em','font-size':'14px'}"
-                              [style]="tableStyleHeader" >
-          </kendo-grid-column> -->
+          
           <kendo-grid-column field="calculationType" title=""
                               [headerStyle]="headerStyle"
-                              [style]="tableStyle" [footerStyle]="rightAlign">
+                              [style]="tableStyleCalcName" [footerStyle]="rightAlign">
           </kendo-grid-column>
-          <kendo-grid-column field="tier1" title="HP"
+          <kendo-grid-column field="tier1" title="SIP"
                               [headerStyle]="headerStyle"
                               [style]="tableStyle" [footerStyle]="rightAlign" >
 
                             <ng-template kendoGridCellTemplate let-dataItem>
-                               <a [ngClass]="{'sku-class':dataItem.sku_tier1,'no-sku-class':!dataItem.sku_tier1}" (click)="onSkuClick(dataItem.sku_tier1)">{{dataItem.tier1}}</a>
+                              <span *ngIf="dataItem.unit=='currency'">
+                                  <a [ngClass]="{'sku-class':dataItem.sku_tier1,'no-sku-class':!dataItem.sku_tier1}" (click)="onSkuClick(dataItem.sku_tier1)">{{dataItem.tier1 | currency : 'GBP'}}</a>
+                              </span>
+                              <span *ngIf="dataItem.unit=='percent'">
+                                  <a [ngClass]="{'sku-class':dataItem.sku_tier1,'no-sku-class':!dataItem.sku_tier1}" (click)="onSkuClick(dataItem.sku_tier1)">{{dataItem.tier1 | percent}}</a>
+                              </span>
+                              <span *ngIf="dataItem.unit=='count'">
+                                  <a [ngClass]="{'sku-class':dataItem.sku_tier1,'no-sku-class':!dataItem.sku_tier1}" (click)="onSkuClick(dataItem.sku_tier1)">{{dataItem.tier1}}</a>
+                              </span>
                             </ng-template>
              
           </kendo-grid-column>
-          <kendo-grid-column field="tier2" title="Tier2"
+          <kendo-grid-column field="tier2" title="HE"
                               [headerStyle]="headerStyle"
                               [style]="tableStyle" [footerStyle]="rightAlign">
                               <ng-template kendoGridCellTemplate let-dataItem>
-                                <a [ngClass]="{'sku-class':dataItem.sku_tier1,'no-sku-class':!dataItem.sku_tier1}" (click)="onSkuClick(dataItem.sku_tier2)">{{dataItem.tier2}}</a>
+                                  <span *ngIf="dataItem.unit=='currency'">
+                                      <a [ngClass]="{'sku-class':dataItem.sku_tier1,'no-sku-class':!dataItem.sku_tier1}" (click)="onSkuClick(dataItem.sku_tier1)">{{dataItem.tier2 | currency : 'GBP'}}</a>
+                                  </span>
+                                  <span *ngIf="dataItem.unit=='percent'">
+                                      <a [ngClass]="{'sku-class':dataItem.sku_tier1,'no-sku-class':!dataItem.sku_tier1}" (click)="onSkuClick(dataItem.sku_tier1)">{{dataItem.tier2 | percent}}</a>
+                                  </span>
+                                  <span *ngIf="dataItem.unit=='count'">
+                                      <a [ngClass]="{'sku-class':dataItem.sku_tier1,'no-sku-class':!dataItem.sku_tier1}" (click)="onSkuClick(dataItem.sku_tier1)">{{dataItem.tier2}}</a>
+                                  </span>
                              </ng-template>
           </kendo-grid-column>
-          <kendo-grid-column field="tier3" title="Tier3"
-                              [headerStyle]="{'background-color': '#666','color': '#fff','line-height': '1em','font-size':'14px'}"
+          <kendo-grid-column field="tier3" title="LE"
+                              [headerStyle]="headerStyle"
                               [style]="tableStyle" [footerStyle]="rightAlign">
                               <ng-template kendoGridCellTemplate let-dataItem>
-                                <a [ngClass]="{'sku-class':dataItem.sku_tier1,'no-sku-class':!dataItem.sku_tier1}" (click)="onSkuClick(dataItem.sku_tier3)">{{dataItem.tier3}}</a>
+                                  <span *ngIf="dataItem.unit=='currency'">
+                                      <a [ngClass]="{'sku-class':dataItem.sku_tier1,'no-sku-class':!dataItem.sku_tier1}" (click)="onSkuClick(dataItem.sku_tier1)">{{dataItem.tier3 | currency : 'GBP'}}</a>
+                                  </span>
+                                  <span *ngIf="dataItem.unit=='percent'">
+                                      <a [ngClass]="{'sku-class':dataItem.sku_tier1,'no-sku-class':!dataItem.sku_tier1}" (click)="onSkuClick(dataItem.sku_tier1)">{{dataItem.tier3 | percent}}</a>
+                                  </span>
+                                  <span *ngIf="dataItem.unit=='count'">
+                                      <a [ngClass]="{'sku-class':dataItem.sku_tier1,'no-sku-class':!dataItem.sku_tier1}" (click)="onSkuClick(dataItem.sku_tier1)">{{dataItem.tier3}}</a>
+                                  </span>
                              </ng-template>
           </kendo-grid-column>
-          <kendo-grid-column field="tier4" title="Tier4"
-                              [headerStyle]="{'background-color': '#666','color': '#fff','line-height': '1em','font-size':'14px'}"
+          <kendo-grid-column field="tier4" title="Other"
+                              [headerStyle]="headerStyle"
                               [style]="tableStyle" [footerStyle]="rightAlign">
                               <ng-template kendoGridCellTemplate let-dataItem>
-                                <a [ngClass]="{'sku-class':dataItem.sku_tier1,'no-sku-class':!dataItem.sku_tier1}" (click)="onSkuClick(dataItem.sku_tier4)">{{dataItem.tier4}}</a>
+                                  <span *ngIf="dataItem.unit=='currency'">
+                                      <a [ngClass]="{'sku-class':dataItem.sku_tier1,'no-sku-class':!dataItem.sku_tier1}" (click)="onSkuClick(dataItem.sku_tier1)">{{dataItem.tier4 | currency : 'GBP'}}</a>
+                                  </span>
+                                  <span *ngIf="dataItem.unit=='percent'">
+                                      <a [ngClass]="{'sku-class':dataItem.sku_tier1,'no-sku-class':!dataItem.sku_tier1}" (click)="onSkuClick(dataItem.sku_tier1)">{{dataItem.tier4 | percent}}</a>
+                                  </span>
+                                  <span *ngIf="dataItem.unit=='count'">
+                                      <a [ngClass]="{'sku-class':dataItem.sku_tier1,'no-sku-class':!dataItem.sku_tier1}" (click)="onSkuClick(dataItem.sku_tier1)">{{dataItem.tier4}}</a>
+                                  </span>
                              </ng-template>
           </kendo-grid-column>
           <kendo-grid-column field="total" title="Total"  
-                              [headerStyle]="{'background-color': '#666','color': '#fff','line-height': '1em','font-size':'14px'}"
+                              [headerStyle]="headerStyle"
                               [style]="tableStyle" [footerStyle]="rightAlign">
                               <ng-template kendoGridCellTemplate let-dataItem>
-                                <a [ngClass]="{'sku-class':dataItem.sku_tier1,'no-sku-class':!dataItem.sku_tier1}" (click)="onSkuClick(dataItem.sku_total)">{{dataItem.total}}</a>
+                                  <span *ngIf="dataItem.unit=='currency'">
+                                      <a [ngClass]="{'sku-class':dataItem.sku_tier1,'no-sku-class':!dataItem.sku_tier1}" (click)="onSkuClick(dataItem.sku_tier1)">{{dataItem.total | currency : 'GBP'}}</a>
+                                  </span>
+                                  <span *ngIf="dataItem.unit=='percent'">
+                                      <a [ngClass]="{'sku-class':dataItem.sku_tier1,'no-sku-class':!dataItem.sku_tier1}" (click)="onSkuClick(dataItem.sku_tier1)">{{dataItem.total | percent}}</a>
+                                  </span>
+                                  <span *ngIf="dataItem.unit=='count'">
+                                      <a [ngClass]="{'sku-class':dataItem.sku_tier1,'no-sku-class':!dataItem.sku_tier1}" (click)="onSkuClick(dataItem.sku_tier1)">{{dataItem.total}}</a>
+                                  </span>
                              </ng-template>
           </kendo-grid-column>
          

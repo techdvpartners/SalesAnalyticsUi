@@ -32,15 +32,24 @@ export class HomeComponent implements OnInit {
   flat_avg:any;
   weight_avg:any;
   tableStyle={
-    'font-size':'14px',
+    'font-size':'15px',
     'text-align':'center'
   }
   tableStyleHeader={
+    'font-size':'15px',
+    'text-align':'center'
+  }
+  tableStyleCalcName={
+    'font-size':'15px',
+    'text-align':'left'
+  }
+  headerStyle={
+    'background-color': '#666',
+    'color': '#fff',
+    'line-height': '1em',
     'font-size':'16px',
     'text-align':'center'
   }
-  headerStyle=
-    {'background-color': '#666','color': '#fff','line-height': '1em','font-size':'14px','text-align':'center'}
   
   
   
@@ -54,7 +63,7 @@ export class HomeComponent implements OnInit {
     
   }
 
-  public data: any = [];//[new SalesData('','Revenue',234567890.11,234567890.11,234567890.11,234567890.11,234567890.11),new SalesData('','Revenue',234567890.11,234567890.11,234567890.11,234567890.11,234567890.11)];
+  public data: any = [];
 
   ngOnInit() {
     console.log("Home");
@@ -98,15 +107,11 @@ export class HomeComponent implements OnInit {
     //promises.push(avgPricePromise);
 
     forkJoin(promises).subscribe(res=>{
-
-    console.log("DATATATA : "+res);
      this.data = res[1];
-    //  let header={"heading":"This Time Last Year"};
      if(this.data){
      this.data.splice(0,0,res[0]);
      this.data.splice(5,0,{calculationType:" "});
      }
-      console.log(this.data);
     });
     
   }

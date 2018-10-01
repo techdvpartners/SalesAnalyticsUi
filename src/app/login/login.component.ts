@@ -35,7 +35,7 @@ error="";
           console.log("res",res);
           let authBase64=btoa(username + ':' + password);
           localStorage.setItem("auth",authBase64);
-          window.location.href='/sales';
+          window.location.href='/pricing';
         }
       
       },err=>{
