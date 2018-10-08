@@ -10,11 +10,11 @@
           
           <kendo-grid-column field="calculationType" title=""
                               [headerStyle]="headerStyle"
-                              [style]="tableStyleCalcName" [footerStyle]="rightAlign">
+                              [style]="tableStyleCalcName">
           </kendo-grid-column>
           <kendo-grid-column field="tier1" title="SIP"
                               [headerStyle]="headerStyle"
-                              [style]="tableStyle" [footerStyle]="rightAlign" >
+                              [style]="tableStyle">
 
                             <ng-template kendoGridCellTemplate let-dataItem>
                               <span *ngIf="dataItem.unit=='currency' && (dataItem.calculationType=='Revenue' || dataItem.calculationType=='Margin')">
@@ -34,7 +34,7 @@
           </kendo-grid-column>
           <kendo-grid-column field="tier2" title="HE"
                               [headerStyle]="headerStyle"
-                              [style]="tableStyle" [footerStyle]="rightAlign">
+                              [style]="tableStyle">
                               <ng-template kendoGridCellTemplate let-dataItem>
                                     <span *ngIf="dataItem.unit=='currency' && (dataItem.calculationType=='Revenue' || dataItem.calculationType=='Margin')">
                                             <a [ngClass]="{'sku-class':dataItem.sku_tier1,'no-sku-class':!dataItem.sku_tier1}" (click)="onSkuClick(dataItem.sku_tier2)">{{dataItem.tier2 | currency : 'GBP' : 'symbol' : '1.0-0'}}</a>
@@ -52,7 +52,7 @@
           </kendo-grid-column>
           <kendo-grid-column field="tier3" title="LE"
                               [headerStyle]="headerStyle"
-                              [style]="tableStyle" [footerStyle]="rightAlign">
+                              [style]="tableStyle">
                               <ng-template kendoGridCellTemplate let-dataItem>
                                 <span *ngIf="dataItem.unit=='currency' && (dataItem.calculationType=='Revenue' || dataItem.calculationType=='Margin')">
                                             <a [ngClass]="{'sku-class':dataItem.sku_tier1,'no-sku-class':!dataItem.sku_tier1}" (click)="onSkuClick(dataItem.sku_tier3)">{{dataItem.tier3 | currency : 'GBP' : 'symbol' : '1.0-0'}}</a>
@@ -70,7 +70,7 @@
           </kendo-grid-column>
           <kendo-grid-column field="tier4" title="Other"
                               [headerStyle]="headerStyle"
-                              [style]="tableStyle" [footerStyle]="rightAlign">
+                              [style]="tableStyle">
                               <ng-template kendoGridCellTemplate let-dataItem>
                                     <span *ngIf="dataItem.unit=='currency' && (dataItem.calculationType=='Revenue' || dataItem.calculationType=='Margin')">
                                             <a [ngClass]="{'sku-class':dataItem.sku_tier1,'no-sku-class':!dataItem.sku_tier1}" (click)="onSkuClick(dataItem.sku_tier4)">{{dataItem.tier4 | currency : 'GBP' : 'symbol' : '1.0-0'}}</a>
@@ -88,7 +88,7 @@
           </kendo-grid-column>
           <kendo-grid-column field="total" title="Total"  
                               [headerStyle]="headerStyle"
-                              [style]="tableStyle" [footerStyle]="rightAlign">
+                              [style]="tableStyle">
                               <ng-template kendoGridCellTemplate let-dataItem>
                                     <span *ngIf="dataItem.unit=='currency' && (dataItem.calculationType=='Revenue' || dataItem.calculationType=='Margin')">
                                             <a [ngClass]="{'sku-class':dataItem.sku_tier1,'no-sku-class':!dataItem.sku_tier1}" (click)="onSkuClick(dataItem.sku_total)">{{dataItem.total | currency : 'GBP' : 'symbol' : '1.0-0'}}</a>
@@ -113,7 +113,7 @@
     </div>
     </div>
 
-        <kendo-excelexport [data]="data" [group]="group" fileName="sales-analytics.xlsx" #excelexport>
+        <kendo-excelexport [data]="data" fileName="sales-analytics.xlsx" #excelexport>
             <!-- <kendo-excelexport-column field="heading" [locked]="true" title=" ">
             </kendo-excelexport-column> -->
             <kendo-excelexport-column field="calculationType" title=" ">
