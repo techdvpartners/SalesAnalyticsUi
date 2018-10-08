@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -18,12 +18,19 @@ import { ReportIssueComponent } from '../dailogs/report-issue/report-issue.compo
 })
 export class SaleNavComponent {
   
+  superCategories=[];
   categories=[];
   subGroups=[];
   groups=[];
+  supcatSelectedOptions: string[]=[]
   catSelectedOptions: string[]=[]
   groupSelectedOptions: string[]=[]
-  subSelectedOptions: string[]=[]
+  subSelectedOptions: string[]=[];
+  @ViewChild("drawer") drawer;
+  @ViewChild("drawerEnd") drawerEnd;
+  
+
+
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches)
@@ -43,6 +50,10 @@ export class SaleNavComponent {
 }
 
 getDropdown(){
+  this.saleService.getDropdownData("supercategory").subscribe(res=>{
+    this.superCategories=res;
+
+  });
   this.saleService.getDropdownData("category").subscribe(res=>{
     this.categories=res;
 
@@ -71,6 +82,7 @@ getDropdown(){
     }else{
      //TO-DO:Message to show - Not Authorized to perform action
     }
+    this.drawer.close();
 
   }
 
@@ -82,16 +94,36 @@ getDropdown(){
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
+    this.drawer.close();
+
   }
 
 
   navClick(menuItem:string){
     this.navService.setNavClick(menuItem);
+    this.drawer.close();
 
   }
   logout(){
     localStorage.removeItem("auth");
     this.router.navigateByUrl("/login");
+  }
+  onChangesupCat(eve){
+    console.log("eve",eve)
+    let filterOptions={
+      supcategories:eve
+    }
+    console.log(filterOptions);
+      this.saleService.getDropdownFilter("supercategory",filterOptions).subscribe(res=>{
+      this.catSelectedOptions=[];
+      this.groupSelectedOptions=[];
+      this.subSelectedOptions=[];
+      this.categories= res.cat;
+      this.groups= res.grps;
+      this.subGroups=res.subgroups;
+     
+     console.log("aas",res)
+      })
   }
   onChangeCat(eve){
     //group/filtered
@@ -127,6 +159,7 @@ getDropdown(){
   }
   onFilter(){
     let filterOptions={
+      "supcategories":this.supcatSelectedOptions,
       "categories":this.catSelectedOptions,
       "groups":this.groupSelectedOptions,
       "subGroups":this.subSelectedOptions
@@ -135,15 +168,22 @@ getDropdown(){
     //   console.log("filter data",res);
     // })
     this.navService.setFilterData(filterOptions);
+    this.drawerEnd.close();
+    
 
     
    // console.log("data",filterOptions)
   }
   onReset(){
+    this.supcatSelectedOptions=[];
     this.groupSelectedOptions=[];
     this.catSelectedOptions=[];
     this.subSelectedOptions=[];
     this.getDropdown();
+    this.onFilter();
+    //console.log(this.drawer);
+    this.drawerEnd.close();
+
 
   }
   

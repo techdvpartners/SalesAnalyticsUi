@@ -77,7 +77,7 @@ import { ShowSkuComponent } from './dailogs/show-sku/show-sku.component';
     MatExpansionModule,
     NgProgressModule.forRoot({
       spinnerPosition: 'right',
-      color: '#f71cff',
+      color: '#ed1c24',
       thick: true
     }),
     NgProgressHttpModule.forRoot(),
